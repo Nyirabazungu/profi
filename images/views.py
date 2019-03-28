@@ -11,7 +11,8 @@ from django.contrib.auth.models import User
 def home(request):
     images = Image.objects.all()
     profile = Profile.objects.all()
-    return render(request,'welcome.html',{"profile":profile,"images":images})
+
+    return render(request,"welcome.html", {"profile":profile,"images":image})
 
 def profile(request):
     current_user = request.user
@@ -42,7 +43,7 @@ def profil(request,id):
     profiles = Profile.objects.get()
     images = Image.objects.filter(user = user).all()
    
-    return render(request,'profile.html',{"profiles":profile,"user":user,"images":images})
+    return render(request,"profile.html",{"profiles":profile,"user":user,"images":images})
 
 def profile(request):
     current_user = request.user
@@ -53,7 +54,7 @@ def profile(request):
             profile.user = current_user
             profile.save()
 
-        return redirect(home)
+        return redirect("welcome")
 
     else:
         form = ProfileForm()
@@ -68,7 +69,7 @@ def image(request):
             image.user = current_user
             image.save()
 
-            return redirect(home)
+            return redirect("welcome")
 
     else:
         form = ImageForm()
@@ -80,9 +81,7 @@ def comments(request):
         form = CommentsForm(request.POST,request.FILES)
         if form.is_valid():
             comment=form.save(commit=False)
-
-            comment.commenter = current_user
-
+            comment.user = current_user
             comment.save()
 
         return redirect('welcome')
@@ -105,5 +104,4 @@ def like(request):
     else:
         form = LikeForm()
     return render(request, 'like.html', {"form": form})
-
 
