@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,HttpResponse
-from .forms import ProfileForm,ImageForm,CommentsForm
+from .forms import ProfileForm,ImageForm,CommentsForm,LikeForm
 from .models import Image,Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -32,7 +32,7 @@ def profile(request):
 def images(request,image_id):
     image = Image.objects.get(id = image_id)
     
-    return render(request,"welcome.html", {"image":image})
+    return render(request,"comment.html", {"image":image})
 
 #   return redirect('Welcome')    
 
@@ -75,19 +75,20 @@ def image(request):
     return render(request, 'picture.html', {"form": form})
 
 def comments(request):
-    current_user = request.user
+    current_user=request.user
     if request.method == 'POST':
-        form = CommentsForm(request.POST, request.FILES)
+        form = CommentsForm(request.POST,request.FILES)
         if form.is_valid():
-            comments = form.save(commit=False)
-            comments.user = current_user
-            comments.save()
+            comment=form.save(commit=False)
 
-            return redirect(home)
+            comment.commenter = current_user
 
+            comment.save()
+
+        return redirect('welcome')
     else:
-        form = CommentsForm()
-    return render(request, 'comment.html', {"form": form})
+        form= CommentsForm()
+    return render(request,'comment.html',{"form":form})
 
 
 def like(request):
