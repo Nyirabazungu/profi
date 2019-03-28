@@ -21,6 +21,7 @@
   <h4 class="modal-title"><strong>{{pic.image.title}}</strong></h4>          
        <a href="/images/{{pic.id}}"><img src="{{pic.image.url}}" alt="Image" width='400' length='500'></a>
   <p><strong><em>{{pic.image.caption}}</em></strong></p><br>
+  <p><a href="{%url 'images'%}">comment</a></p>
 
 
   {% endfor %}
