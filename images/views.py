@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    # images = Image.objects.all()
+    images = Image.objects.all()
     profile = Profile.objects.all()
     return render(request,'welcome.html',{"profile":profile,"images":images})
 
@@ -39,10 +39,10 @@ def images(request,image_id):
 @login_required(login_url='/accounts/login/')
 def profil(request,id):
     user = User.objects.get(id = id)
-    profiles = Profile.objects.get(user = user)
+    profiles = Profile.objects.get()
     images = Image.objects.filter(user = user).all()
    
-    return render(request,'my_profile.html',{"profiles":profiles,"user":user,"images":images})
+    return render(request,'profile.html',{"profiles":profile,"user":user,"images":images})
 
 def profile(request):
     current_user = request.user
@@ -72,7 +72,7 @@ def image(request):
 
     else:
         form = ImageForm()
-    return render(request, 'image.html', {"form": form})
+    return render(request, 'picture.html', {"form": form})
 
 def comments(request):
     current_user = request.user
