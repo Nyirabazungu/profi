@@ -19,12 +19,11 @@
 
    {% for pic in image %}
 
-  <h4 class="modal-title"><strong>{{pic.title}}</strong></h4>          
-       <a href="/image/{{pic.id}}"><img src="{{pic.image.url}}" alt="Image" width='400' length='500'></a>
-  <p><strong><em>{{pic.caption}}</em></strong></p><br>
-  <p><a href="{%url 'image'%}">comment</a></p>
-
-
+      <div class="col-xs-4 col-sm-6 col-md-4 col-lg-4">
+       <a href="/description/{{pic.id}}"><img src="{{pic.image.url}}" alt="Image" width='300' length='500'></a>
+       <br>
+       <button class="well"><a href="{%url 'comments'%}"><strong>COMMENTS</strong></a></button>
+       </div>
   {% endfor %}
 </div>
 </body>
