@@ -9,10 +9,10 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    images = Image.objects.all()
+    image = Image.objects.all()
     profile = Profile.objects.all()
 
-    return render(request,"welcome.html", {"profile":profile,"images":image})
+    return render(request,'welcome.html', {"profile":profile,"image":image})
 
 def profile(request):
     current_user = request.user
@@ -33,17 +33,17 @@ def profile(request):
 def images(request,image_id):
     image = Image.objects.get(id = image_id)
     
-    return render(request,"comment.html", {"image":image})
+    return render(request,"picture.html", {"image":image})
 
 #   return redirect('Welcome')    
 
 @login_required(login_url='/accounts/login/')
 def profil(request,id):
     user = User.objects.get(id = id)
-    profiles = Profile.objects.get()
+    profile = Profile.objects.get()
     images = Image.objects.filter(user = user).all()
-   
-    return render(request,"profile.html",{"profiles":profile,"user":user,"images":images})
+    form=ProfileForm()
+    return render(request,"all-images/profil.html",{"profile":profile,"user":user,"images":image,"form":form})
 
 def profile(request):
     current_user = request.user
@@ -54,7 +54,7 @@ def profile(request):
             profile.user = current_user
             profile.save()
 
-        return redirect("welcome")
+        return redirect(home)
 
     else:
         form = ProfileForm()
@@ -69,7 +69,7 @@ def image(request):
             image.user = current_user
             image.save()
 
-            return redirect("welcome")
+            return redirect('welcome')
 
     else:
         form = ImageForm()
