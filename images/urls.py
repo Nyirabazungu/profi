@@ -10,7 +10,7 @@ urlpatterns=[
     url(r'^image/', views.image, name='image'),
     url(r'^comments/', views.comments, name='comments'),
     url(r'^images/(\d+)',views.images,name ='images'),
-    url(r'^like/',views.like,name ='like'),
+    url(r'^description/(\d+)',views.description,name ='description')
 
 ]
 if settings.DEBUG:
