@@ -3,6 +3,7 @@ from django import forms
 
 class ProfileForm(forms.ModelForm):
     class Meta:
+        email = forms.EmailField(label='Email')
         model = Profile
         exclude = ['user']
 
