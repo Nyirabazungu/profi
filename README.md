@@ -12,21 +12,18 @@
 -pip install django-tinymce
 -pip install pillow
 
-
-
-### description of project
-  This Application  is allow the people  be creating an account of the website for the popular photo app,and to do comment and like.
+## description of project
+  This Application  is allow the people  be creating an account of the website for the popular photo app,and to comment and like.
 
 ##  set up requirements
         1.  A running network connection to the internet.
         2.  A web browser.
         3.  This link .https://github.com/Nyirabazungu/profi
-
         4.  Install the  User-contact by cloning this repository:https://Nyirabazungu.github.io/profi/
         5.  Open from any linient browser.
 
 
-### Deployment
+## Deployment
         Enter the link into the url interface and click the prompt.
 
 ## link to live site on GitHub pages
